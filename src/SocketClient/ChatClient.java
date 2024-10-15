@@ -1,14 +1,18 @@
-package Socket;
+package SocketClient;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class ChatClient extends SocketClient {
+public class ChatClient {
     BufferedReader keyboardReader;
+    BufferedReader socketReader;
+    BufferedWriter socketWriter;
 
-    public ChatClient(String target_IP, int port) {
-        super(target_IP, port);
+    public ChatClient(SocketClient socketClient) {
+        socketReader = socketClient.getSocketReader();
+        socketWriter = socketClient.getSocketWriter();
         initChat();
     }
 

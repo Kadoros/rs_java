@@ -1,4 +1,4 @@
-package Socket;
+package SocketClient;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -6,18 +6,20 @@ import java.awt.image.BufferedImage;
 import java.io.BufferedOutputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
+import java.net.Socket;
 
-public class ScreenCastClient extends SocketClient {
+public class ScreenCastClient  {
     final int w = Toolkit.getDefaultToolkit().getScreenSize().width;
     final int h = Toolkit.getDefaultToolkit().getScreenSize().height;
 
     BufferedImage image;
     BufferedOutputStream socketByteOutStream;
     DataInputStream mouseInputStream;
+    Socket socket;
     Robot r;
 
-    public ScreenCastClient(String target_IP, int port) {
-        super(target_IP, port);
+    public ScreenCastClient(SocketClient socketClient) {
+        socket = socketClient.getSocket();
         initStreams(); // Initialize streams here
     }
 
@@ -76,16 +78,7 @@ public class ScreenCastClient extends SocketClient {
         }
     }
 
-    public static void main(String[] args)  {
-        try {
-            ScreenCastClient screenCastClient = new ScreenCastClient("127.0.0.1", 1000);
-            screenCastClient.sendScreenCast();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
 
-
-    }
 
 
 }
